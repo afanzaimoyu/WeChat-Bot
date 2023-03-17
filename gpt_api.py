@@ -9,32 +9,28 @@ from datetime import datetime
 
 import openai
 
-proxies = {
-    'http': 'http://127.0.0.1:proxy',
-    'https': 'http://127.0.0.1:proxy'
-
-}
-openai.proxy = proxies
-
-api_key = 'your_api_key'
-openai.api_key = api_key
-
-MAX_TOKEN_LENGTH = 1024
-TIME_OUT = 3
-
-MANAGE_ROLE = 'system'  # 设定助手的行为
-BOT_ROLE = 'assistant'  # 当chatGPT忘记了上下文，就可以用来存储先前的响应，给chatGPT提供所需的行为实例
-USER_ROLE = 'user'  # 用户输入
-
-initial_prompt = 'your initial prompt'
-
+# 'system'   设定助手的行为
+# 'assistant'   当chatGPT忘记了上下文，就可以用来存储先前的响应，给chatGPT提供所需的行为实例
+# 'user'   用户输入
 
 class GptThread:
     """
     chatgpt
     """
-
-    def __init__(self):
+    def __init__(self, api_key: str, proxies: dict, time_out: int, max_token_length: int, initial_prompt: str):
+        """
+        初始化
+        :param api_key:
+        :param proxies:
+        :param time_out:
+        :param max_token_length:
+        :param initial_prompt:
+        """
+        self.initial_prompt = initial_prompt
+        self.time_out = time_out
+        self.max_token_length = max_token_length
+        openai.proxy = proxies
+        openai.api_key = api_key
         self.msg = []
         self.reset_msg()
 
@@ -48,8 +44,8 @@ class GptThread:
             model='gpt-3.5-turbo',
             messages=self.msg,
             temperature=1.0,  # 0-2 越高回答越随机
-            max_tokens=MAX_TOKEN_LENGTH,
-            timeout=TIME_OUT,
+            max_tokens=self.max_token_length,
+            timeout=self.time_out,
         )
         resp = response['choices'][0]['message']['content']
         return resp
@@ -61,6 +57,7 @@ class GptThread:
         :return: resp: ChatGPT's reply(after processing)
         """
         try:
+            print('开始调用gpt-3.5-turbo模型')
             self.add_user_contet(prompt)
             resp = self.a_message_was_received_from_the_api()
             resp = resp[2:] if resp.startswith("\n\n") else resp
@@ -76,21 +73,21 @@ class GptThread:
         reset chatgpt msg
         """
 
-        self.msg = [{'role': MANAGE_ROLE, 'content': initial_prompt}]
+        self.msg = [{'role': 'system', 'content': self.initial_prompt}]
 
     def add_bot_content(self, content):
         """
         Add bot content to the chatgpt msg
         :param content: the last round of conversation
         """
-        self.msg.append({'role': BOT_ROLE, 'content': content})
+        self.msg.append({'role': 'assistant', 'content': content})
 
     def add_user_contet(self, content):
         """
         Add user content to the chatgpt msg
         :param content: user input
         """
-        self.msg.append({'role': USER_ROLE, 'content': content})
+        self.msg.append({'role': 'user', 'content': content})
 
     def reset_system_content(self, content):
         """
