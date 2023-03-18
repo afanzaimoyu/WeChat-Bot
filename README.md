@@ -2,7 +2,8 @@
 
 ## 如何使用
 0. 安装python 例如：python 3.8.x
-1. 安装微信 3.7.0.30
+1. 安装微信 3.7.0.30,下载地址[这个](https://github.com/afanzaimoyu/WeChat-Bot/releases/download/wechat/WeChatSetup-3.7.0.30.exe
+)
 2. 安装依赖
 ```python
 # 升级pip
