@@ -1,4 +1,25 @@
 # 使用方法
+
+
+
+1. `is_login` 检查登录状态
+2. `get_self_wxid` 获取登陆账号的wxid
+3. `get_msg_types` 获取消息类型
+4. `get_contacts` 获取所有联系人
+5. `get_friends` 获取所有好友
+6. `get_dbs` 获取数据库
+7. `get_tables` 获取数据库中的表
+8. `send_text` 发送文本消息，可以@
+9. `send_image` 发送图片消息
+10. `send_xml` 发送xml
+11. `send_file` 发送文件消息
+12. `enable_receiving_msg ` 允许接收消息
+13. `disable_recv_msg` 停止接收消息
+14. `query_sql` 执行sql查询
+15. `accept_new_friend` 接收好友申请
+16. `add_chatroom_members` 添加群成员
+
+---
 1. **enable_recv_msg()**
    - 首先判断是否已经在接收消息，如果是，则直接返回`True`。
    - 如果回调函数为空，则返回`False`。
@@ -64,3 +85,4 @@
                     return
             self._is_running = False
      ```
+     

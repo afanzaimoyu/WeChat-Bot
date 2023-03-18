@@ -18,6 +18,13 @@ pip install -r requirements.txt
 
 
 ## 更新
+- **2023.3.18**
+  - 更新`robot.py` 
+    - 新增  自动添加好友并发送自定义消息
+    - 新增  微信聊天的方式更新配置文件
+    -  新增 用chatgpt与好友聊天
+    -  新增  用chatgpt与群友聊天
+  - 更新 wcfree.py 用法
 - **2023.3.18** 
   - 更新`gpt.py` 将一些参数丢到了json文件中，方便修改
   - 新建了`job_all.py` 创建了定时类型的任务

@@ -42,16 +42,16 @@ def main():
     robot.LOG.info("----正在启动机器人----")
 
     # 机器人启动后发送测试消息
-    robot.sendTextMsg("机器人启动成功！", "filehelper")
+    robot.send_text_msg("机器人启动成功！", "filehelper")
 
     # 接收消息
-    robot.action_to_Msg()
+    robot.enable_receive_message_service()
 
     # 每天7点定时发送天气预报
     robot.on_every_time('07:00', weather_report, robot=robot)
 
     # 让机器人一直跑
-    robot.keepRunning_and_block_the_process()
+    robot.keep_running_and_block_the_process()
 
 
 if __name__ == "__main__":
