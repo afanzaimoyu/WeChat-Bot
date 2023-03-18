@@ -19,6 +19,9 @@ pip install -r requirements.txt
 
 
 ## 更新
+- **2023.3.19**
+  - 新增 `gpt_session.py` 将chat的个性化设置分离出来
+  - 新增 上下文功能，聊天不再出戏 ，10轮自动总结上文会话，理论上能一直聊
 - **2023.3.18**
   - 更新`robot.py` 
     - 新增  自动添加好友并发送自定义消息
@@ -53,4 +56,5 @@ pip install -r requirements.txt
 - [造轮子的大佬-wcfree](https://github.com/lich0821/WeChatFerry)
 - [ChatGPT api + python+赛博女友](https://zhuanlan.zhihu.com/p/610731099)
 - [群大佬的wxbot-基于itchat](https://github.com/c0rnP1ex/wxbot_w_gpt)
+- [ChatGPT最新模型指南——gpt-3.5-turbo](https://zhuanlan.zhihu.com/p/613581212)
 - 待更新

@@ -23,7 +23,7 @@ def weather_report(robot: Robot) -> None:
 
     for i in receivers:
         # 发送消息
-        robot.sendTextMsg(resp, i)
+        robot.send_text_msg(resp, i)
         # 发信息并且@所有人
         # robot.sendImageMsg(resp, i, "nofity@all")
 
@@ -32,7 +32,7 @@ def main():
     # 运行日志
     wcf = Wcf(debug=True)
 
-    def clean_all():
+    def clean_all(sig, frame):
         wcf.cleanup()  # 退出前清理环境
         exit(0)
 

@@ -21,7 +21,7 @@ class Config:
         read the configuration file
         """
         self.initial_prompt = None
-        self.max_token_length = None
+        self.max_token = None
         self.timeout = None
         self.Proxies = None
         self.CHAT_KEY = None
@@ -29,7 +29,7 @@ class Config:
         self.reload()
 
     def __repr__(self):
-        print(self.initial_prompt, self.max_token_length, self.timeout, self.Proxies, self.CHAT_KEY, self.GROUPS)
+        print(self.initial_prompt, self.max_token, self.timeout, self.Proxies, self.CHAT_KEY, self.GROUPS)
 
     def load_config(self) -> dict:
         """
@@ -44,7 +44,7 @@ class Config:
             with open(f"{name}/config.json.template", mode='r', encoding='utf-8') as f:
                 json_config = json.load(f)
                 with open(f"{name}/config.json", mode='w+', encoding='utf-8') as f1:
-                    json.dump(json_config, f1, indent=2)
+                    json.dump(json_config, f1, indent=4)
 
         return json_config
 
@@ -58,7 +58,7 @@ class Config:
         self.GROUPS = json_config['groups']['enable']
         self.Proxies = json_config['chatgpt']['proxies']
         self.timeout = json_config['chatgpt']['timeout']
-        self.max_token_length = json_config['chatgpt']['max_token_length']
+        self.max_token = json_config['chatgpt']['max_token']
         self.initial_prompt = json_config['chatgpt']['initial_prompt']
 
 

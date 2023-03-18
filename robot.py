@@ -9,13 +9,13 @@
 import re
 import time
 import logging
+# import xml.etree.ElementTree as ET
 from lxml import etree as ET
-
 from wcferry import Wcf
 
 from my_config import Config
 from job_all import Job
-from gpt_api import GptThread
+from gpt_sessoin import session
 
 
 class Robot(Job):
@@ -29,7 +29,7 @@ class Robot(Job):
         self.LOG = logging.getLogger("Robot")
         self.wxid = self.wcf.get_self_wxid()
         self.allPeople = self.getall_people()
-        self.chat = GptThread(self.config.CHAT_KEY)
+        self.session = session(config=self.config)
 
     def enable_receive_message_service(self) -> None:
         """
@@ -46,6 +46,7 @@ class Robot(Job):
             self.LOG.info(msg)
             self.various_methods(msg)
         except Exception as e:
+
             self.LOG.error(f'出现错误，接收消息出粗：{e}')
 
     def various_methods(self, msg: Wcf.WxMsg) -> None:
@@ -118,6 +119,19 @@ class Robot(Job):
         :return: 处理状态， True为处理成功， False为处理失败
         """
         question = re.sub(r"@.*?[\u2005|\s]", "", msg.content)
+        resp = self.session.ask(question)
+        print(question, 'question')
+        print(resp, 'resp')
+        if resp:
+            receiver = msg.roomid if msg.from_group() else msg.sender
+            at_lists = ""
+            if msg.from_group():
+                at_lists = msg.sender
+            self.send_text_msg(resp, receiver, at_lists)
+            return True
+        else:
+            self.LOG.error("---无法从ChatGPT获得答案---")
+            return False
 
     def send_text_msg(self, msg: str, receiver: str, at_lists: str = '') -> None:
         """
@@ -127,12 +141,8 @@ class Robot(Job):
         :param at_lists: 要@的人的wxid列表，@所有人为：nofity@all
         """
         # msg 中需要有 @ 名单中一样数量的 @
-        ats = ""
-        if at_lists:
-            wxids = at_lists.split(",")
-            for wxid in wxids:
-                ats = f" @{self.allPeople.get(wxid, '')}"
-
+        wxids = at_lists.split(",") if at_lists else []
+        ats = ''.join([f' @{self.allPeople.get(wxid, "")}' for wxid in wxids])
         self.LOG.info(f"To {receiver}: {msg}{ats}")
         self.wcf.send_text(f"{msg}{ats}", receiver, at_lists)
 
