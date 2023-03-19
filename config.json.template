@@ -142,7 +142,7 @@
       "https": "http://127.0.0.1:proxy"
     },
     "timeout": "5",
-    "max_token_length": "1024",
+    "max_token": 2048,
     "initial_prompt": "初始化你的描述"
   }
 

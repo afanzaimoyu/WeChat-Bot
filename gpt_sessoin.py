@@ -20,6 +20,7 @@ class session:
         print(self.cont, 'cont')
 
     def ask(self, question):
+        print(self.cont, 'cont')
         if self.cont >= 10:
             self.chat.add_user_contet('请以最精简的话语总结我们的对话，100字以内')
             res = self.chat.get_resp()

@@ -53,7 +53,7 @@ class GptThread:
             timeout=self.time_out,
         )
         resp = response['choices'][0]["message"]["content"]
-        print(response)
+        print('response', response)
         print(f"消耗的token：{response['usage']['total_tokens']}")
         return resp
 

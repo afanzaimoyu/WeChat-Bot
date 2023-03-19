@@ -17,11 +17,18 @@ pip install -r requirements.txt
    - `proxies`配置你的代理，如果需要的话
    - `initial_prompt`配置你的初始化描述
 
-
+## 待实现 or 问题
+- 多个群聊之间会相互干扰(考虑生产者消费者模型，用多线程或多进程实现)
+- 初始prompt定死了（特定指令切换prompt并重置聊天）
+- 导出聊天记录（存起来，特定指令导出）
+- 自己选择开启新的聊天（能查看当前聊天轮数，特定指令开启）
+- 群组白名单得手动改代码，虽说改完之后能微信上更新
+- 
 ## 更新
 - **2023.3.19**
   - 新增 `gpt_session.py` 将chat的个性化设置分离出来
   - 新增 上下文功能，聊天不再出戏 ，10轮自动总结上文会话，理论上能一直聊
+  - 
 - **2023.3.18**
   - 更新`robot.py` 
     - 新增  自动添加好友并发送自定义消息
@@ -29,6 +36,7 @@ pip install -r requirements.txt
     -  新增 用chatgpt与好友聊天
     -  新增  用chatgpt与群友聊天
   - 更新 wcfree.py 用法
+  - 
 - **2023.3.18** 
   - 更新`gpt.py` 将一些参数丢到了json文件中，方便修改
   - 新建了`job_all.py` 创建了定时类型的任务
@@ -42,11 +50,11 @@ pip install -r requirements.txt
 
 - **2023.3.17** 配置了chatgpt
   1. 本来是打算用itcaht的，封麻了，只能再找轮子了
-  2. chatgpt支持上下文统计 ，还没弄，再了解一下
+  2. ~~chatgpt支持上下文统计 ，还没弄，再了解一下~~(不行，还是得一起发)
     ```python
-    res = await api.sendMessage('What were we talking about?', {
-        parentMessageId: res.id
-    })
+        res = await api.sendMessage('What were we talking about?', {
+            parentMessageId: res.id
+        })
     ``` 
 
   
