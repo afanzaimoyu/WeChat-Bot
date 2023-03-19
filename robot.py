@@ -110,7 +110,63 @@ class Robot(Job):
         :param msg: 微信消息结构体
         :return: 处理状态， True为处理成功， False为处理失败
         """
-        return self.get_chat_gpt(msg)
+        question = re.sub(r"@.*?[\u2005|\s]", "", msg.content)
+        if question == '?' or question == '？':
+            resp = '''
+        使用手册：
+            @ 我 而不是复制哦
+            0. ? 查看帮助
+            1. 直接跟我聊天
+            2. /init 重置对话,回归初始人设
+            3. /remove 重置对话
+            4. /reserve+初始人物设定 创建新的人格 
+            5. /prompt 查看当前人设
+            问题： 现在几个群一起聊天信息会串起来，有空再改
+            '''
+            receiver = msg.roomid if msg.from_group() else msg.sender
+            at_lists = ""
+            if msg.from_group():
+                at_lists = msg.sender
+            self.send_text_msg(resp, receiver, at_lists)
+            return True
+        if '/prompt' in question:
+            receiver = msg.roomid if msg.from_group() else msg.sender
+            at_lists = ""
+            resp = self.session.get_now_system()
+            if msg.from_group():
+                at_lists = msg.sender
+            self.send_text_msg(resp, receiver, at_lists)
+            return True
+        if '/reserve' in question:
+            q = re.sub(r"/reserve", "", question).strip()
+            resp = self.session.reserve_session(q)
+            receiver = msg.roomid if msg.from_group() else msg.sender
+            at_lists = ""
+            if msg.from_group():
+                at_lists = msg.sender
+            self.send_text_msg(resp, receiver, at_lists)
+            return True
+
+        if '/init' in question:
+            print(question, "重置对话")
+            resp = self.session.start_session()
+            receiver = msg.roomid if msg.from_group() else msg.sender
+            at_lists = ""
+            if msg.from_group():
+                at_lists = msg.sender
+            self.send_text_msg(resp, receiver, at_lists)
+            return True
+
+        if '/remove' in question:
+            resp = self.session.now_init_session()
+            receiver = msg.roomid if msg.from_group() else msg.sender
+            at_lists = ""
+            if msg.from_group():
+                at_lists = msg.sender
+            self.send_text_msg(resp, receiver, at_lists)
+            return True
+        else:
+            return self.get_chat_gpt(msg)
 
     def get_chat_gpt(self, msg: Wcf.WxMsg) -> bool:
         """
