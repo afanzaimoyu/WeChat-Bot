@@ -111,6 +111,7 @@ class Robot(Job):
         :return: 处理状态， True为处理成功， False为处理失败
         """
         question = re.sub(r"@.*?[\u2005|\s]", "", msg.content)
+
         if question == '?' or question == '？':
             resp = '''
         使用手册：
@@ -123,47 +124,34 @@ class Robot(Job):
             5. /prompt 查看当前人设
             问题： 现在几个群一起聊天信息会串起来，有空再改
             '''
-            receiver = msg.roomid if msg.from_group() else msg.sender
-            at_lists = ""
-            if msg.from_group():
-                at_lists = msg.sender
-            self.send_text_msg(resp, receiver, at_lists)
+            at_lists = msg.sender
+            self.send_text_msg(resp, msg.roomid, at_lists)
             return True
-        if '/prompt' in question:
-            receiver = msg.roomid if msg.from_group() else msg.sender
-            at_lists = ""
+
+        if '/prompt' == question:
             resp = self.session.get_now_system()
-            if msg.from_group():
-                at_lists = msg.sender
-            self.send_text_msg(resp, receiver, at_lists)
+            at_lists = msg.sender
+            self.send_text_msg(resp, msg.roomid, at_lists)
             return True
+
         if '/reserve' in question:
             q = re.sub(r"/reserve", "", question).strip()
             resp = self.session.reserve_session(q)
-            receiver = msg.roomid if msg.from_group() else msg.sender
-            at_lists = ""
-            if msg.from_group():
-                at_lists = msg.sender
-            self.send_text_msg(resp, receiver, at_lists)
+            at_lists = msg.sender
+            self.send_text_msg(resp, msg.roomid, at_lists)
             return True
 
-        if '/init' in question:
+        if '/init' == question:
             print(question, "重置对话")
             resp = self.session.start_session()
-            receiver = msg.roomid if msg.from_group() else msg.sender
-            at_lists = ""
-            if msg.from_group():
-                at_lists = msg.sender
-            self.send_text_msg(resp, receiver, at_lists)
+            at_lists = msg.sender
+            self.send_text_msg(resp, msg.roomid, at_lists)
             return True
 
-        if '/remove' in question:
+        if '/remove' == question:
             resp = self.session.now_init_session()
-            receiver = msg.roomid if msg.from_group() else msg.sender
-            at_lists = ""
-            if msg.from_group():
-                at_lists = msg.sender
-            self.send_text_msg(resp, receiver, at_lists)
+            at_lists = msg.sender
+            self.send_text_msg(resp, msg.roomid, at_lists)
             return True
         else:
             return self.get_chat_gpt(msg)
