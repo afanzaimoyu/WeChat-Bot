@@ -110,7 +110,7 @@ class Robot(Job):
         :param msg: 微信消息结构体
         :return: 处理状态， True为处理成功， False为处理失败
         """
-        question = re.sub(r"@.*?[\u2005|\s]", "", msg.content)
+        question = re.sub(r"@.*?[\u2005|\s]", "", msg.content).strip()
 
         if question == '?' or question == '？':
             resp = '''
@@ -141,7 +141,7 @@ class Robot(Job):
             self.send_text_msg(resp, msg.roomid, at_lists)
             return True
 
-        if '/init' == question:
+        if '/init' in question:
             print(question, "重置对话")
             resp = self.session.start_session()
             at_lists = msg.sender

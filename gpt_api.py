@@ -5,8 +5,29 @@
 # Version   :       1.0
 # Contact   :       f2095522823@gmail.com
 # License   :       MIT LICENSE
+"""
+                   /~@@~\,
+ _______ . _\_\___/\ __ /\___|_|_ . _______
+/ ____  |=|      \  <_+>  /      |=|  ____ \
+~|    |\|=|======\\______//======|=|/|    |~
+ |_   |    \      |      |      /    |    |
+  \==-|     \     |  2D  |     /     |----|~~)
+  |   |      |    |      |    |      |____/~/
+  |   |       \____\____/____/      /    / /
+  |   |         {----------}       /____/ /
+  |___|        /~~~~~~~~~~~~\     |_/~|_|/
+   \_/        [/~~~~~||~~~~~\]     /__|\
+   | |         |    ||||    |     (/|[[\)
+   [_]        |     |  |     |
+              |_____|  |_____|
+              (_____)  (_____)
+              |     |  |     |
+              |     |  |     |
+              |/~~~\|  |/~~~\|
+              /|___|\  /|___|\
+             <_______><_______>
+"""
 from datetime import datetime
-
 import openai
 
 
@@ -19,7 +40,8 @@ class GptThread:
     chatgpt
     """
 
-    def __init__(self, api_key: str, proxies: dict, time_out: int, max_token: int, initial_prompt: str):
+    def __init__(self, api_key: str, proxies: dict, time_out: int,
+                 max_token: int, initial_prompt: str):
         """
         初始化
         :param api_key:
