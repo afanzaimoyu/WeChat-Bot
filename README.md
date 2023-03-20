@@ -68,8 +68,8 @@ pip install -r requirements.txt
 ## 发现的一些好玩的东西
 - [cursor编辑器，免费gpt4](https://www.cursor.so)
 - [创建自己的gpt小应用](https://open-gpt.app)
-- [gpt4免费的api](https://www/steamship.com/)
-  [查询天气的接口](https://zhwnlapi.etouch.cn/Ecalender/weather_mini?city=北京https://zhwnlapi.etouch.cn/Ecalender/weather_mini?city=北京)
+- [gpt4免费的api](https://www.steamship.com/)
+-  [查询天气的接口](https://zhwnlapi.etouch.cn/Ecalender/weather_mini?city=北京https://zhwnlapi.etouch.cn/Ecalender/weather_mini?city=北京)
 ## 参考
 - [openai使用指南](https://github.com/openai/openai-cookbook)
 - [ChatGPT 中文调教指南](https://github.com/PlexPt/awesome-chatgpt-prompts-zh)
