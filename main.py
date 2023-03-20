@@ -31,17 +31,21 @@
 from wcferry import Wcf
 import signal  # 处理特殊信号
 from robot import Robot
+from test import Weather
+from my_config import Config
+
+config = Config()
+wt = Weather()
 
 
 def weather_report(robot: Robot) -> None:
     """
-    Send weather forecasts
+    Send Weather forecasts
     """
     # 获取接收人
-    receivers = ["filehelper"]
-
+    receivers = config.GROUPS
     # 获取天气
-    resp = "这是天气预报"
+    resp = wt.get_weather("北京")
 
     for i in receivers:
         # 发送消息

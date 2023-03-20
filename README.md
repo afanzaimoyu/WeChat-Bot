@@ -3,9 +3,9 @@
 ## 如何使用
 0. 安装python 例如：python 3.8.x
 1. 安装微信 3.7.0.30,下载地址[这个](https://github.com/afanzaimoyu/WeChat-Bot/releases/download/wechat/WeChatSetup-3.7.0.30.exe
-)
+)                        **记得把自动更新关了！！！！**
 2. 安装依赖
-```python
+```markdown
 # 升级pip
 pip install -U pip
 # 安装必要的依赖
@@ -16,7 +16,23 @@ pip install -r requirements.txt
    - `key`配置你的key
    - `proxies`配置你的代理，如果需要的话
    - `initial_prompt`配置你的初始化描述
+4. 目前 个人聊天自动接入gpt
+5. 群组聊天 需要先@下面是命令
+    - ? ：查看帮助
+    - 直接跟我聊天 
+    - `/init`： 重置对话,回归初始人设 
+    - `/remove`： 重置对话 
+    - `/reserve`：初始人物设定 创建新的人格 
+    - `/prompt` ：查看当前人设
 
+* [WeChat-Bot](#wechat-bot)
+  * [如何使用](#如何使用)
+  * [待实现 or 问题](#待实现-or-问题)
+  * [更新](#更新)
+  * [发现的一些好玩的东西](#发现的一些好玩的东西)
+  * [有任何问题可以提交issue或者添加我的微信和我联系](#有任何问题可以提交issue或者添加我的微信和我联系)
+  * [参考](#参考)
+<!-- TOC -->
 ## 待实现 or 问题
 - 多个群聊之间会相互干扰(考虑生产者消费者模型，用多线程或多进程实现)
 - ~~初始prompt定死了（特定指令切换prompt并重置聊天）~~
@@ -26,6 +42,8 @@ pip install -r requirements.txt
 - 图片
 - 
 ## 更新
+- **2023.3.21**
+  - 新增每天早上七点发送天气信息 
 - **2023.3.19**
   - 新增 `gpt_session.py` 将chat的个性化设置分离出来
   - 新增 上下文功能，聊天不再出戏 ，10轮自动总结上文会话，理论上能一直聊
@@ -58,18 +76,18 @@ pip install -r requirements.txt
 
 - **2023.3.17** 配置了chatgpt
   1. 本来是打算用itcaht的，封麻了，只能再找轮子了
-  2. ~~chatgpt支持上下文统计 ，还没弄，再了解一下~~(不行，还是得一起发)
-    ```python
-        res = await api.sendMessage('What were we talking about?', {
-            parentMessageId: res.id
-        })
-    ``` 
+
   
 ## 发现的一些好玩的东西
 - [cursor编辑器，免费gpt4](https://www.cursor.so)
 - [创建自己的gpt小应用](https://open-gpt.app)
 - [gpt4免费的api](https://www.steamship.com/)
--  [查询天气的接口](https://zhwnlapi.etouch.cn/Ecalender/weather_mini?city=北京https://zhwnlapi.etouch.cn/Ecalender/weather_mini?city=北京)
+-  [查询天气的接口](https://zhwnlapi.etouch.cn/Ecalender/weather_mini?city=北京)
+
+## 有任何问题可以提交issue或者添加我的微信和我联系
+<img height="100px" src="D:\Wechat_Bot_GPT\微信图片_20230321015626.jpg" width="100px"/>
+
+
 ## 参考
 - [openai使用指南](https://github.com/openai/openai-cookbook)
 - [ChatGPT 中文调教指南](https://github.com/PlexPt/awesome-chatgpt-prompts-zh)
