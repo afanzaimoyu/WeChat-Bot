@@ -26,7 +26,8 @@ class session:
         if self.cont >= 10:
             self.chat.add_user_contet('请以最精简的话语总结我们的对话，100字以内')
             res = self.chat.get_resp()
-            self.chat.reset_msg()
+            now_sys = self.chat.msg[0]['content']
+            self.chat.add_system_content(now_sys)
             self.chat.add_bot_content(res)
             self.cont = 0
             resp = "哎呀，脑袋不够用了呢，总感觉忘了什么事似的，真奇怪QAQ,麻烦你再问一遍吧"

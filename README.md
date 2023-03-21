@@ -1,5 +1,5 @@
 # WeChat-Bot
-
+<!-- TOC -->
 ## 如何使用
 0. 安装python 例如：python 3.8.x
 1. 安装微信 3.7.0.30,下载地址[这个](https://github.com/afanzaimoyu/WeChat-Bot/releases/download/wechat/WeChatSetup-3.7.0.30.exe
@@ -32,7 +32,7 @@ pip install -r requirements.txt
   * [发现的一些好玩的东西](#发现的一些好玩的东西)
   * [有任何问题可以提交issue或者添加我的微信和我联系](#有任何问题可以提交issue或者添加我的微信和我联系)
   * [参考](#参考)
-<!-- TOC -->
+
 ## 待实现 or 问题
 - 多个群聊之间会相互干扰(考虑生产者消费者模型，用多线程或多进程实现)
 - ~~初始prompt定死了（特定指令切换prompt并重置聊天）~~
