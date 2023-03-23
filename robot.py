@@ -16,6 +16,8 @@ from wcferry import Wcf
 from my_config import Config
 from job_all import Job
 from gpt_sessoin import session
+from test import Weather
+from baidu.speak import Baidu
 
 
 class Robot(Job):
@@ -30,6 +32,8 @@ class Robot(Job):
         self.wxid = self.wcf.get_self_wxid()
         self.allPeople = self.getall_people()
         self.session = session(config=self.config)
+        self.wt = Weather()
+        self.baidu = Baidu()
 
     def enable_receive_message_service(self) -> None:
         """
@@ -122,7 +126,10 @@ class Robot(Job):
             3. /remove 重置对话
             4. /reserve+初始人物设定 创建新的人格 
             5. /prompt 查看当前人设
-            问题： 现在几个群一起聊天信息会串起来，有空再改
+            6. /weather +地点 查看天气
+            7. /sing 文本转语音
+            问题： i:现在几个群一起聊天信息会串起来，有空再改
+                ii:长字数的回答后面会卡死。。。。。。
             '''
             at_lists = msg.sender
             self.send_text_msg(resp, msg.roomid, at_lists)
@@ -130,6 +137,12 @@ class Robot(Job):
 
         if '/prompt' == question:
             resp = self.session.get_now_system()
+            at_lists = msg.sender
+            self.send_text_msg(resp, msg.roomid, at_lists)
+            return True
+        if '/weather' in question:
+            q = re.sub(r"/weather", "", question).strip()
+            resp = self.wt.get_weather(q)
             at_lists = msg.sender
             self.send_text_msg(resp, msg.roomid, at_lists)
             return True
@@ -153,6 +166,19 @@ class Robot(Job):
             at_lists = msg.sender
             self.send_text_msg(resp, msg.roomid, at_lists)
             return True
+
+        if '/sing' in question:
+            q = re.sub(r"/sing", "", question).strip()
+            resp = self.session.ask(q+'，请少于1024GBK字节')
+            self.baidu.speak(resp)
+            a = at_lists = msg.sender
+            if a:
+                self.LOG.info("----语音已生成----")
+                self.wcf.send_file('./baidu/audio.mp3', msg.roomid)
+                self.send_text_msg(resp, msg.roomid, at_lists)
+                return True
+            else:
+                self.send_text_msg("生成失败", msg.roomid, at_lists)
         else:
             return self.get_chat_gpt(msg)
 

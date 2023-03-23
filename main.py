@@ -45,7 +45,7 @@ def weather_report(robot: Robot) -> None:
     # 获取接收人
     receivers = config.GROUPS
     # 获取天气
-    resp = wt.get_weather("北京")
+    resp = wt.get_weather("地点")
 
     for i in receivers:
         # 发送消息

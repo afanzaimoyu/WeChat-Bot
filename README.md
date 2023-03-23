@@ -3,7 +3,8 @@
 ## 如何使用
 0. 安装python 例如：python 3.8.x
 1. 安装微信 3.7.0.30,下载地址[这个](https://github.com/afanzaimoyu/WeChat-Bot/releases/download/wechat/WeChatSetup-3.7.0.30.exe
-)                        **记得把自动更新关了！！！！**
+)                        **记得把自动更新关了！！！！** 
+   1. 闪退的话查看下微信版本 是不是自动更新最新版本了，  或者下载 `3.7.0.30.21` 版本
 2. 安装依赖
 ```markdown
 # 升级pip
@@ -24,6 +25,8 @@ pip install -r requirements.txt
     - `/remove`： 重置对话 
     - `/reserve`：初始人物设定 创建新的人格 
     - `/prompt` ：查看当前人设
+    - `/weather`： +地点 查询天气
+    - `/sing`： 文本回复转语音
 
 * [WeChat-Bot](#wechat-bot)
   * [如何使用](#如何使用)
@@ -42,6 +45,9 @@ pip install -r requirements.txt
 - 图片
 - 
 ## 更新
+- **2023.3.23**
+  - 新增查询天气接口
+  - 新增文本转语音
 - **2023.3.21**
   - 新增每天早上七点发送天气信息 
 - **2023.3.19**
@@ -85,7 +91,7 @@ pip install -r requirements.txt
 -  [查询天气的接口](https://zhwnlapi.etouch.cn/Ecalender/weather_mini?city=北京)
 
 ## 有任何问题可以提交issue或者添加我的微信和我联系
-<img height="100px" src="D:\Wechat_Bot_GPT\微信图片_20230321015626.jpg" width="100px"/>
+<img height="100px" src="微信图片_20230321015626.jpg" width="100px"/>
 
 
 ## 参考

@@ -13,11 +13,12 @@
 9. `send_image` 发送图片消息
 10. `send_xml` 发送xml
 11. `send_file` 发送文件消息
-12. `enable_receiving_msg ` 允许接收消息
-13. `disable_recv_msg` 停止接收消息
-14. `query_sql` 执行sql查询
-15. `accept_new_friend` 接收好友申请
-16. `add_chatroom_members` 添加群成员
+12. `sebd_emotion` 发送表情包
+13. `enable_receiving_msg ` 允许接收消息
+14. `disable_recv_msg` 停止接收消息
+15. `query_sql` 执行sql查询
+16. `accept_new_friend` 接收好友申请
+17. `add_chatroom_members` 添加群成员
 
 ---
 1. **enable_recv_msg()**
